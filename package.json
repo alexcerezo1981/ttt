@@ -1,0 +1,23 @@
+{
+  "name": "package",
+  "version": "1.0.0",
+  "description": "Tic Tac Toe Game",
+  "main": "tic",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "repository"
+  },
+  "keywords": [
+    "keywords"
+  ],
+  "author": "Alejandro",
+  "license": "UNLICENSED"
+}
