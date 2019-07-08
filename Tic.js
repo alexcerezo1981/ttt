@@ -21,20 +21,59 @@ var BoxUsed = false     // Variable to control if the box is already used
 
 
     
-// Display the board
-console.clear ()
-console.log ("Tic Tac Toe")
-console.log ("")
-console.log("--- --- ---")
-console.log(" " + BoardGame[0] + " | " + BoardGame[1] + " | " + BoardGame[2])
-console.log("--- --- ---")
-console.log(" " + BoardGame[3] + " | " + BoardGame[4] + " | " + BoardGame[5])
-console.log("--- --- ---")
-console.log(" " + BoardGame[6] + " | " + BoardGame[7] + " | " + BoardGame[8])
-console.log("--- --- ---")
-console.log ("")
-console.log ("it's the turn for " + turn + ". Press one of the numbers displayed on the board. Press 'e' for Exit")
+// Function to Display the board
 
+function DisplayBoard() {
+    console.clear ()
+    console.log ("Tic Tac Toe")
+    console.log ("")
+    console.log("--- --- ---")
+    console.log(" " + BoardGame[0] + " | " + BoardGame[1] + " | " + BoardGame[2])
+    console.log("--- --- ---")
+    console.log(" " + BoardGame[3] + " | " + BoardGame[4] + " | " + BoardGame[5])
+    console.log("--- --- ---")
+    console.log(" " + BoardGame[6] + " | " + BoardGame[7] + " | " + BoardGame[8])
+    console.log("--- --- ---")
+    console.log ("")
+
+    // If we don't have a winner yet, check if all the boxes are used ("Drawn"), if not display the turn of the next player
+    if (TurnCounter===9){
+        console.log ("DRAW!")
+        process.exit();
+    }else{
+        if (BoxUsed===false)
+        console.log ("it's the turn for " + turn + ". Press one of the numbers displayed on the board. Press 'e' for Exit")
+    }}
+
+function CheckIfWinner(){
+    if (BoardGame[0]===BoardGame[1] && BoardGame[1]===BoardGame[2]){
+        console.log (BoardGame[0] + " WINS THE GAME!!!")
+        process.exit()
+    }else if (BoardGame[3]===BoardGame[4] && BoardGame[4]===BoardGame[5]){
+        console.log (BoardGame[3] + " WINS THE GAME!!!")
+        process.exit()
+    }else if (BoardGame[6]===BoardGame[7] && BoardGame[7]===BoardGame[8]){
+        console.log (BoardGame[6] + " WINS THE GAME!!!")
+        process.exit()
+    }else if (BoardGame[0]===BoardGame[3] && BoardGame[3]===BoardGame[6]){
+        console.log (BoardGame[0] + " WINS THE GAME!!!")
+        process.exit()
+    }else if (BoardGame[1]===BoardGame[4] && BoardGame[4]===BoardGame[7]){
+        console.log (BoardGame[1] + " WINS THE GAME!!!")
+        process.exit()
+    }else if (BoardGame[2]===BoardGame[5] && BoardGame[5]===BoardGame[8]){
+        console.log (BoardGame[2] + " WINS THE GAME!!!")
+        process.exit()
+    }else if (BoardGame[0]===BoardGame[4] && BoardGame[4]===BoardGame[8]){
+        console.log (BoardGame[0] + " WINS THE GAME!!!")
+        process.exit()
+    }else if (BoardGame[4]===BoardGame[6] && BoardGame[6]===BoardGame[2]){
+        console.log (BoardGame[4] + " WINS THE GAME!!!")
+        process.exit()
+    }
+}
+
+DisplayBoard()
 
 process.stdin.on('keypress', (str, key) => {
 
@@ -57,66 +96,20 @@ process.stdin.on('keypress', (str, key) => {
             }else{
                 BoardGame[i-1]=turn         // Update the array with the new value
                 
-                // Update the board
-                console.clear ()
-                console.log ("Tic Tac Toe")
-                console.log ("")
-                console.log("--- --- ---")
-                console.log(" " + BoardGame[0] + " | " + BoardGame[1] + " | " + BoardGame[2])
-                console.log("--- --- ---")
-                console.log(" " + BoardGame[3] + " | " + BoardGame[4] + " | " + BoardGame[5])
-                console.log("--- --- ---")
-                console.log(" " + BoardGame[6] + " | " + BoardGame[7] + " | " + BoardGame[8])
-                console.log("--- --- ---")
-                console.log ("")
-
                 // Change the turn
                 if (turn==="X"){
                     turn="O"
                 }else{
                     turn="X"
                 }
-                TurnCounter=TurnCounter+1  
-            }
-            
-            // Check if there is a winner
+                TurnCounter=TurnCounter+1    
+                
+                // Update the board
+                DisplayBoard()
 
-            if (BoardGame[0]===BoardGame[1] && BoardGame[1]===BoardGame[2]){
-                console.log (BoardGame[0] + " WINS THE GAME!!!")
-                process.exit()
-            }else if (BoardGame[3]===BoardGame[4] && BoardGame[4]===BoardGame[5]){
-                console.log (BoardGame[3] + " WINS THE GAME!!!")
-                process.exit()
-            }else if (BoardGame[6]===BoardGame[7] && BoardGame[7]===BoardGame[8]){
-                console.log (BoardGame[6] + " WINS THE GAME!!!")
-                process.exit()
-            }else if (BoardGame[0]===BoardGame[3] && BoardGame[3]===BoardGame[6]){
-                console.log (BoardGame[0] + " WINS THE GAME!!!")
-                process.exit()
-            }else if (BoardGame[1]===BoardGame[4] && BoardGame[4]===BoardGame[7]){
-                console.log (BoardGame[1] + " WINS THE GAME!!!")
-                process.exit()
-            }else if (BoardGame[2]===BoardGame[5] && BoardGame[5]===BoardGame[8]){
-                console.log (BoardGame[2] + " WINS THE GAME!!!")
-                process.exit()
-            }else if (BoardGame[0]===BoardGame[4] && BoardGame[4]===BoardGame[8]){
-                console.log (BoardGame[0] + " WINS THE GAME!!!")
-                process.exit()
-            }else if (BoardGame[4]===BoardGame[6] && BoardGame[6]===BoardGame[2]){
-                console.log (BoardGame[4] + " WINS THE GAME!!!")
-                process.exit()
+                // Check if there is a winner
+                CheckIfWinner() 
             }
-            
-
-            // If there is not winner, check if we can continue the game or finish the game as a draw
-            if (TurnCounter===9){
-                console.log ("DRAW!")
-                process.exit();
-            }else{
-                if (BoxUsed===false)
-                console.log ("it's the turn for " + turn + ". Press one of the numbers displayed on the board. Press 'e' for Exit")
-            }
-
             WrongKey=false
         }
     }
