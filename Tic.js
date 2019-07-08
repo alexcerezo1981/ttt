@@ -42,23 +42,26 @@ function CheckBoxUsed(BoxUsed){
         return BoxUsed = false
 }
 
-function CheckIfWinner(){
 
-    if (BoardGame[0]===BoardGame[1] && BoardGame[1]===BoardGame[2] || BoardGame[3]===BoardGame[4] && BoardGame[4]===BoardGame[5] || BoardGame[6]===BoardGame[7] && BoardGame[7]===BoardGame[8] || BoardGame[0]===BoardGame[3] && BoardGame[3]===BoardGame[6] || BoardGame[1]===BoardGame[4] && BoardGame[4]===BoardGame[7] || BoardGame[2]===BoardGame[5] && BoardGame[5]===BoardGame[8] || BoardGame[0]===BoardGame[4] && BoardGame[4]===BoardGame[8] || BoardGame[4]===BoardGame[6] && BoardGame[6]===BoardGame[2])  
-    {
-        console.log (turn + " WINS THE GAME!!!")
-        process.exit()
+
+function NextTurn(player){
+    if (player==="X"){
+        player="O"
     }else{
-        if (turn==="X"){
-            turn="O"
-        }else{
-            turn="X"
-        }
-        TurnCounter=TurnCounter+1 
+        player="X"
     }
+    return(player)
 }
 
+
+
+
+
+
+//////// Program Starts
+
 DisplayBoard()
+console.log ("it's the turn for " + turn + ". Press one of the numbers displayed on the board. Press 'e' for Exit")
 
 process.stdin.on('keypress', (str, key) => {
 
@@ -75,16 +78,23 @@ process.stdin.on('keypress', (str, key) => {
         if(key.sequence === i.toString ()) {
 
             // Check if the box is already in use
+
             BoxUsed=CheckBoxUsed(i.toString())
             if (BoxUsed=false){
-            //if (BoardGame[i-1]!=i.toString ()){
                 console.log ("This box is already in used, please select another one")
                 BoxUsed = true
             }else{
                 BoardGame[i-1]=turn         // Update the array with the new value
  
                 // Check if there is a winner
-                CheckIfWinner() 
+                if (BoardGame[0]===BoardGame[1] && BoardGame[1]===BoardGame[2] || BoardGame[3]===BoardGame[4] && BoardGame[4]===BoardGame[5] || BoardGame[6]===BoardGame[7] && BoardGame[7]===BoardGame[8] || BoardGame[0]===BoardGame[3] && BoardGame[3]===BoardGame[6] || BoardGame[1]===BoardGame[4] && BoardGame[4]===BoardGame[7] || BoardGame[2]===BoardGame[5] && BoardGame[5]===BoardGame[8] || BoardGame[0]===BoardGame[4] && BoardGame[4]===BoardGame[8] || BoardGame[4]===BoardGame[6] && BoardGame[6]===BoardGame[2])  
+                    {
+                        console.log (turn + " WINS THE GAME!!!")
+                        process.exit()
+                }else{
+                    turn=NextTurn(turn)
+                    TurnCounter=TurnCounter+1 
+                }
 
                 // Update the board
                 DisplayBoard()

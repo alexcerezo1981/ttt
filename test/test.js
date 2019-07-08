@@ -6,11 +6,17 @@ describe ('DisplayBoard', function(){
     })
 })
 
-describe ('CheckIfWinner', function(){
-    it ('Check if we have a winner', function(){
-
+describe ('NextTurn', function(){
+    it ('Check if the turn is for X', function(){
+        var player="X"
+        expect(player).to.equal("X")
+    })
+    it ('Check if the turn is for O', function(){
+        var player="O"
+        expect(player).to.equal("O")
     })
 })
+
 
 describe ('CheckBoxUsed', function(){
     it ('The box Selected is in use', function(){
